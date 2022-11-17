@@ -11,12 +11,21 @@ class MainPage extends Page {
             '> div.brandhub-search__container > div > form > div > input')
     }
 
+    get cookiesButton() {
+        return $('body > cmm-cookie-banner').shadow$('div > div > div.cmm-cookie-banner__content > cmm-buttons-wrapper ' +
+            '> div > div > button.wb-button.wb-button--primary.wb-button--small.wb-button--accept-all')
+    }
+
     async open() {
         await super.open('https://www.mercedes-benz.com/en/');
     }
 
     async clickSearchButton() {
         await (await this.searchButton).click();
+    }
+
+    async clickCookiesButton() {
+        await (await this.cookiesButton).click();
     }
 
     async inputSearchField(searchString) {

@@ -3,8 +3,7 @@ export default class Page {
         this.title = 'Mercedes-mallisto: uusien autojen valikoima | Mercedes-Benz';
     }
 
-    async open (path) {
+    async open(path) {
         await browser.url(path);
-        await browser.setWindowSize(1920, 1080);
     }
 }

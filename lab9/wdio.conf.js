@@ -50,7 +50,7 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-    
+
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
@@ -63,6 +63,7 @@ exports.config = {
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
         // excludeDriverLogs: ['bugreport', 'server'],
     }],
+
     //
     // ===================
     // Test Configurations
@@ -111,7 +112,7 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['chromedriver'],
-    
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -132,10 +133,19 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters: [
+        [
+            'spec',
+            ['junit', {
+                outputDir: './report'
+            }]
+        ],
+    ],
 
 
-    
+    beforeTest: function (test, context) {
+        browser.maximizeWindow();
+    },
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -144,6 +154,7 @@ exports.config = {
         timeout: 60000,
         require: ['@babel/register'],
     },
+
     //
     // =====
     // Hooks
